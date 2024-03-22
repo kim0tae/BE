@@ -4,8 +4,15 @@
   "description": "BackEnd",
   "main": "index.js",
   "scripts": {
+    "server": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel-node": "^0.0.1-security",
+    "express": "^4.19.1",
+    "nodemon": "^3.1.0"
+  },
+  "type": "module"
 }
