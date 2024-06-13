@@ -6,8 +6,10 @@ import cors from 'cors';
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/', rootRouter);
+app.use('/join', userRouter);
 app.use('/users', userRouter);
+app.use('/', rootRouter);
 
 export default app;
