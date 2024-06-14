@@ -1,10 +1,8 @@
 import express from 'express';
-
+import { getUserInfo, postUserInfo, getChangePassword, postChangePassword } from '../controllers/userController.js';
 const userRouter = express.Router();
 
-userRouter.get('/:id', (req, res) => {
-  console.log(req.params.id);
-  return res.send(`${req.params.id}의 정보`);
-});
+userRouter.route('/:id').get(getUserInfo).post(postUserInfo);
 
+userRouter.route('/change-password').get(getChangePassword).post(postChangePassword);
 export default userRouter;

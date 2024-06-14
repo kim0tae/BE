@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
-const dbURI = 'mongodb://localhost:27017/mydatabase';
-mongoose.connect(dbURI);
+mongoose.connect(process.env.DB_URL);
 
 const db = mongoose.connection;
 const handleOpen = () => console.log('✅ Connected to DB');

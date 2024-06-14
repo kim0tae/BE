@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema({
   socialOnly: { type: Boolean, default: false },
   id: { type: String, required: true, unique: true },
   password: { type: String, require: true },
-  name: { type: String, required: true },
   mobile: { type: String, required: true },
 });
 
