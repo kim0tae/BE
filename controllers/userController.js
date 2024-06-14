@@ -3,23 +3,16 @@ import fetch from 'node-fetch';
 import bcrypt from 'bcrypt';
 
 // ============================================================================
-export const getLogin = (req, res) => {
-  console.log('111');
-};
+export const getLogin = (req, res) => {};
 export const postLogin = async (req, res) => {
-  console.log('111');
   const { id, password } = req.body;
   const user = await User.findOne({ id, socialOnly: false });
   if (!user) {
-    return res.status(400).send({
-      errorMessage: 'An account with id does not exists.',
-    });
+    return res.status(400).send({ errorMessage: '사용자 정보를 확인해주세요.' });
   }
   const ok = await bcrypt.compare(password, user.password);
   if (!ok) {
-    return res.status(400).send({
-      errorMessage: 'Wrong password.',
-    });
+    return res.status(400).send({ errorMessage: '사용자 정보를 확인해주세요.' });
   }
   req.session.loggedIn = true;
   req.session.user = user;
@@ -32,15 +25,11 @@ export const getJoin = (req, res) => {};
 export const postJoin = async (req, res) => {
   const { id, email, password, mobile, password2 } = req.body;
   if (password !== password2) {
-    return res.status(400).send('/join', {
-      errorMessage: 'Password confirmation does not match.',
-    });
+    return res.status(400).send({ errorMessage: '패스워드가 일치하지 않습니다.' });
   }
   const exists = await User.exists({ $or: [{ id }, { email }] });
   if (exists) {
-    return res.status(400).send('/join', {
-      errorMessage: 'This username/email is already taken',
-    });
+    return res.status(400).send({ errorMessage: 'id 또는 이메일이 이미 존재합니다.' });
   }
   await User.create({
     id,
