@@ -1,10 +1,11 @@
-import mysql from 'mysql';
+import mongoose from 'mongoose';
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1q2w3e4r!',
-  database: 'test_db',
-});
+const dbURI = 'mongodb://localhost:27017/mydatabase';
+mongoose.connect(dbURI);
 
-export default connection;
+const db = mongoose.connection;
+const handleOpen = () => console.log('✅ Connected to DB');
+const handleError = (error) => console.log('❌ DB Error', error);
+
+db.on('error', handleError);
+db.once('open', handleOpen);
