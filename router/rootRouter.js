@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 //
 import { getJoin, postJoin, getLogin, postLogin } from '../controllers/userController.js';
 

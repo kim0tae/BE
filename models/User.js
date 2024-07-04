@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   password: { type: String, require: true },
   mobile: { type: String, required: true },
+  boards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Board' }],
 });
 
 userSchema.pre('save', async function () {
