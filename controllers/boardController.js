@@ -11,6 +11,13 @@ export const watch = async (req, res) => {
   //return res.render('404', { pageTitle: 'Not Found Video' });
 };
 
+export const home = async (req, res) => {
+  const boards = await Board.find({}).sort({ createAt: 'asc' });
+  if (boards) {
+    return res.status(200).send({ success: true, boards });
+  }
+};
+
 export const postUpload = async (req, res) => {
   const _id = req.user._id;
   const { title, contents } = req.body;

@@ -9,8 +9,6 @@ import rootRouter from '../router/rootRouter.js';
 import userRouter from '../router/userRouter.js';
 import boardRouter from '../router/boardRouter.js';
 //
-import { localsMiddleware } from '../src/middlewares.js';
-//
 const app = express();
 const logger = morgan('dev');
 
@@ -26,7 +24,6 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
-app.use(localsMiddleware);
 app.use('/', rootRouter);
 app.use('/board', boardRouter);
 app.use('/users', userRouter);
