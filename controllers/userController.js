@@ -2,8 +2,6 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utility/jwtToken.js';
 
-import jwt from 'jsonwebtoken';
-
 // ============================================================================
 export const getLogin = (req, res) => {};
 export const postLogin = async (req, res) => {
@@ -26,6 +24,8 @@ export const postLogin = async (req, res) => {
     return res.status(401).send({ success: false, errorMessage: '토큰 유효성 에러' });
   }
 };
+// ============================================================================
+
 // ============================================================================
 export const getJoin = (req, res) => {};
 
@@ -57,6 +57,8 @@ export const postJoin = async (req, res) => {
     res.status(401).send({ success: false, errorMessage: '토큰 유효성 에러' });
   }
 };
+// ============================================================================
+
 // ============================================================================
 export const delUserInfo = async (req, res) => {
   const { id } = req.body;
@@ -114,10 +116,8 @@ export const postUserInfo = async (req, res) => {
     if (!user) {
       return res.status(401).send({ success: false, errorMessage: '존재하지 않는 사용자입니다.' });
     }
-
     return res.send({ success: true, user });
   } catch (error) {
-    console.error(error);
     return res.status(500).send({ success: false, errorMessage: error.message });
   }
 };

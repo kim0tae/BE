@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-//
 export const authValidCheck = (req, res, next) => {
   const token = req.header('Authorization');
 
@@ -16,4 +15,3 @@ export const authValidCheck = (req, res, next) => {
     res.status(401).send({ sucess: false, errorMessage: '' });
   }
 };
-//
