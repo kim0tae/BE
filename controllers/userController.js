@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Board from '../models/Board.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utility/jwtToken.js';
 
@@ -112,15 +113,27 @@ export const postUserInfo = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = await User.findOne({ _id: id });
+    const user = await User.findById(id);
     if (!user) {
       return res.status(401).send({ success: false, errorMessage: '존재하지 않는 사용자입니다.' });
     }
-    return res.send({ success: true, user });
+
+    const boards = await Board.find({ owner: id });
+
+    return res.send({ success: true, user, boards });
   } catch (error) {
     return res.status(500).send({ success: false, errorMessage: error.message });
   }
 };
-// ============================================================================
 
+// ============================================================================
+export const postFindID = async (req, res) => {
+  const mobile = req.body.mobile;
+  const user = await User.findOne({ mobile, socialOnly: false });
+  console.log(user);
+  if (!user) {
+    return res.status(400).send({ sucess: false, errorMessage: '가입된 사용자 정보가 없습니다.' });
+  }
+  return res.status(200).send({ success: true, user: user.id });
+};
 // ============================================================================
