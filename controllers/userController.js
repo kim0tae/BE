@@ -130,7 +130,6 @@ export const postUserInfo = async (req, res) => {
 export const postFindID = async (req, res) => {
   const mobile = req.body.mobile;
   const user = await User.findOne({ mobile, socialOnly: false });
-  console.log(user);
   if (!user) {
     return res.status(400).send({ sucess: false, errorMessage: '가입된 사용자 정보가 없습니다.' });
   }
